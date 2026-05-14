@@ -1,0 +1,1426 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UCB-USFX Gestión Energética | Futuro Sostenible</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green-50: #eaf3de;
+    --green-100: #c0dd97;
+    --green-400: #639922;
+    --green-600: #3b6d11;
+    --green-800: #27500a;
+    --blue-50: #e6f1fb;
+    --blue-100: #b5d4f4;
+    --blue-400: #378add;
+    --blue-600: #185fa5;
+    --blue-800: #0c447c;
+    --teal-50: #e1f5ee;
+    --teal-400: #1d9e75;
+    --teal-600: #0f6e56;
+    --gray-50: #f4f6f0;
+    --gray-200: #b4b2a9;
+    --gray-700: #444441;
+    --white: #ffffff;
+    --dark: #0d1a0a;
+    --radius: 14px;
+    --radius-sm: 8px;
+    --shadow: 0 4px 24px rgba(20,60,10,0.10);
+    --shadow-lg: 0 12px 48px rgba(20,60,10,0.16);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    color: #1a2e10;
+    background: #f4f6f0;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(13,26,10,0.96);
+    backdrop-filter: blur(12px);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5vw;
+    height: 68px;
+    border-bottom: 1px solid rgba(99,153,34,0.25);
+  }
+
+  .nav-logo {
+    display: flex; align-items: center; gap: 10px;
+    text-decoration: none;
+  }
+  .nav-logo-icon {
+    width: 36px; height: 36px;
+    background: linear-gradient(135deg, var(--green-400), var(--blue-400));
+    border-radius: 9px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+  }
+  .nav-logo-text {
+    font-size: 15px; font-weight: 700;
+    color: #fff;
+    line-height: 1.2;
+  }
+  .nav-logo-text span { color: var(--green-100); display: block; font-weight: 400; font-size: 11px; letter-spacing: 0.08em; }
+
+  .nav-links {
+    display: flex; gap: 2rem; list-style: none;
+  }
+  .nav-links a {
+    color: rgba(255,255,255,0.7);
+    text-decoration: none; font-size: 14px;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--green-100); }
+
+  .nav-cta {
+    background: var(--green-400);
+    color: #fff; border: none; padding: 9px 20px;
+    border-radius: 30px; font-family: 'Outfit', sans-serif;
+    font-size: 13px; font-weight: 600; cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    text-decoration: none;
+  }
+  .nav-cta:hover { background: var(--green-600); transform: translateY(-1px); }
+
+  .hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+  .hamburger span { display: block; width: 22px; height: 2px; background: #fff; border-radius: 2px; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    background: var(--dark);
+    position: relative;
+    display: flex; align-items: center;
+    overflow: hidden;
+    padding: 100px 5vw 60px;
+  }
+
+  .hero-bg-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(99,153,34,0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(99,153,34,0.07) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  .hero-glow {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+  }
+  .hero-glow-1 {
+    width: 600px; height: 600px;
+    background: rgba(55,138,221,0.18);
+    top: -100px; right: -100px;
+  }
+  .hero-glow-2 {
+    width: 400px; height: 400px;
+    background: rgba(99,153,34,0.20);
+    bottom: 0; left: -80px;
+  }
+
+  .hero-content {
+    position: relative; z-index: 2;
+    max-width: 680px;
+  }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(99,153,34,0.15);
+    border: 1px solid rgba(99,153,34,0.4);
+    color: var(--green-100);
+    font-size: 12px; font-weight: 600; letter-spacing: 0.1em;
+    padding: 6px 14px; border-radius: 30px;
+    margin-bottom: 28px;
+    text-transform: uppercase;
+  }
+  .hero-badge .dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--green-400);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.4rem, 5vw, 3.8rem);
+    color: #fff;
+    line-height: 1.15;
+    margin-bottom: 24px;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--green-100);
+  }
+
+  .hero-sub {
+    font-size: clamp(1rem, 2vw, 1.15rem);
+    color: rgba(255,255,255,0.6);
+    max-width: 520px;
+    margin-bottom: 40px;
+    line-height: 1.7;
+  }
+
+  .hero-actions {
+    display: flex; flex-wrap: wrap; gap: 14px; align-items: center;
+  }
+
+  .btn-primary {
+    background: var(--green-400);
+    color: #fff; border: none; padding: 14px 28px;
+    border-radius: 40px; font-family: 'Outfit', sans-serif;
+    font-size: 15px; font-weight: 600; cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+    box-shadow: 0 4px 20px rgba(99,153,34,0.4);
+  }
+  .btn-primary:hover { background: var(--green-600); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(99,153,34,0.5); }
+
+  .btn-outline {
+    background: transparent;
+    color: rgba(255,255,255,0.8);
+    border: 1px solid rgba(255,255,255,0.25);
+    padding: 14px 28px; border-radius: 40px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 15px; font-weight: 500; cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-outline:hover { border-color: rgba(255,255,255,0.5); color: #fff; background: rgba(255,255,255,0.06); }
+
+  .hero-stats {
+    position: absolute; right: 5vw; top: 50%; transform: translateY(-50%);
+    display: flex; flex-direction: column; gap: 16px;
+    z-index: 2;
+  }
+
+  .stat-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    min-width: 180px;
+    backdrop-filter: blur(8px);
+  }
+  .stat-card .num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.4rem; color: var(--green-100);
+    line-height: 1;
+  }
+  .stat-card .label {
+    font-size: 12px; color: rgba(255,255,255,0.5);
+    margin-top: 4px; text-transform: uppercase; letter-spacing: 0.08em;
+  }
+
+  /* SECTION COMMONS */
+  section { padding: 96px 5vw; }
+  .section-label {
+    display: inline-block;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--green-400);
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(1.9rem, 3.5vw, 2.9rem);
+    color: var(--dark); line-height: 1.2;
+    margin-bottom: 16px;
+  }
+  .section-sub {
+    font-size: 1.05rem; color: #4a5a38;
+    max-width: 580px; line-height: 1.7;
+    margin-bottom: 56px;
+  }
+
+  /* MODELO ESE */
+  .ese-section {
+    background: #fff;
+  }
+  .ese-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 60px; align-items: center;
+  }
+  .ese-visual {
+    position: relative;
+  }
+  .ese-flow {
+    display: flex; flex-direction: column; gap: 0;
+  }
+  .ese-step {
+    display: flex; gap: 20px; align-items: flex-start;
+    padding: 20px 0;
+    border-left: 2px solid var(--green-100);
+    padding-left: 28px;
+    position: relative;
+  }
+  .ese-step::before {
+    content: '';
+    position: absolute; left: -9px; top: 24px;
+    width: 16px; height: 16px; border-radius: 50%;
+    background: var(--green-400);
+    border: 3px solid #fff;
+    box-shadow: 0 0 0 2px var(--green-400);
+  }
+  .ese-step:last-child { border-left-color: transparent; }
+  .ese-step-num {
+    font-size: 11px; font-weight: 700; color: var(--green-400);
+    text-transform: uppercase; letter-spacing: 0.1em;
+    padding-top: 2px;
+    min-width: 16px;
+  }
+  .ese-step h4 { font-size: 15px; font-weight: 600; color: var(--dark); margin-bottom: 4px; }
+  .ese-step p { font-size: 13px; color: #5a6a45; line-height: 1.6; }
+
+  .ese-highlight {
+    background: linear-gradient(135deg, #0d1a0a, #1a3a0d);
+    border-radius: 20px; padding: 40px;
+    color: #fff;
+  }
+  .ese-highlight h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.7rem; margin-bottom: 16px;
+    color: var(--green-100);
+  }
+  .ese-highlight p { font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.7; margin-bottom: 20px; }
+  .ese-tag {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(99,153,34,0.2); border: 1px solid rgba(99,153,34,0.4);
+    color: var(--green-100); font-size: 12px; font-weight: 600;
+    padding: 5px 12px; border-radius: 20px; margin: 4px 4px 4px 0;
+  }
+
+  /* FASES */
+  .fases-section {
+    background: var(--gray-50);
+  }
+  .fases-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+  }
+  .fase-card {
+    background: #fff;
+    border-radius: var(--radius);
+    padding: 32px 28px;
+    border: 1px solid rgba(99,153,34,0.15);
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .fase-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--green-400), var(--blue-400));
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.3s;
+  }
+  .fase-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: rgba(99,153,34,0.35); }
+  .fase-card:hover::before { transform: scaleX(1); }
+
+  .fase-num {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--green-400); margin-bottom: 12px;
+  }
+  .fase-icon {
+    width: 52px; height: 52px; border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px; margin-bottom: 18px;
+  }
+  .fase-icon.f0 { background: var(--green-50); }
+  .fase-icon.f1 { background: var(--blue-50); }
+  .fase-icon.f2 { background: #fff3e0; }
+  .fase-icon.f3 { background: #e8f4e8; }
+  .fase-card h3 { font-size: 17px; font-weight: 700; color: var(--dark); margin-bottom: 10px; }
+  .fase-card p { font-size: 13.5px; color: #5a6a45; line-height: 1.65; }
+  .fase-free {
+    display: inline-block; margin-top: 14px;
+    background: var(--green-50); color: var(--green-600);
+    font-size: 11px; font-weight: 700; letter-spacing: 0.08em;
+    text-transform: uppercase; padding: 4px 10px; border-radius: 20px;
+  }
+  .fase-bullets {
+    margin-top: 14px; padding-left: 0; list-style: none;
+  }
+  .fase-bullets li {
+    font-size: 13px; color: #4a5a38; padding: 3px 0;
+    display: flex; align-items: flex-start; gap: 8px;
+  }
+  .fase-bullets li::before {
+    content: '✓'; color: var(--green-400);
+    font-weight: 700; flex-shrink: 0; margin-top: 1px;
+  }
+
+  /* IOT SECTION */
+  .iot-section {
+    background: #fff;
+  }
+  .iot-grid {
+    display: grid; grid-template-columns: 1fr 1.1fr;
+    gap: 60px; align-items: center;
+  }
+  .iot-dashboard {
+    background: var(--dark);
+    border-radius: 20px;
+    padding: 28px;
+    box-shadow: var(--shadow-lg);
+    position: relative;
+    overflow: hidden;
+  }
+  .iot-dashboard::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image: linear-gradient(rgba(55,138,221,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(55,138,221,0.06) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+  .iot-top-bar {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 22px; position: relative; z-index: 1;
+  }
+  .iot-logo-text { font-size: 11px; font-weight: 700; color: var(--green-100); letter-spacing: 0.1em; text-transform: uppercase; }
+  .iot-live { display: flex; align-items: center; gap: 6px; }
+  .iot-live .dot { width: 7px; height: 7px; border-radius: 50%; background: #4ade80; animation: pulse 1.5s infinite; }
+  .iot-live span { font-size: 11px; color: #4ade80; font-weight: 600; }
+
+  .iot-metrics {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 12px; margin-bottom: 20px; position: relative; z-index: 1;
+  }
+  .iot-metric {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 10px; padding: 14px 12px;
+  }
+  .iot-metric .val { font-size: 1.5rem; font-weight: 700; color: #fff; line-height: 1; }
+  .iot-metric .val.good { color: #4ade80; }
+  .iot-metric .val.warn { color: #fbbf24; }
+  .iot-metric .lbl { font-size: 10px; color: rgba(255,255,255,0.45); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.08em; }
+
+  .iot-chart-area {
+    position: relative; z-index: 1;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px; padding: 16px;
+  }
+  .iot-chart-label { font-size: 10px; color: rgba(255,255,255,0.4); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.08em; }
+  .iot-bars {
+    display: flex; align-items: flex-end; gap: 6px; height: 60px;
+  }
+  .iot-bar { flex: 1; border-radius: 4px 4px 0 0; background: rgba(55,138,221,0.5); transition: background 0.2s; min-width: 0; }
+  .iot-bar.hot { background: rgba(251,191,36,0.8); }
+  .iot-bar.alert { background: rgba(248,113,113,0.9); }
+  .iot-alarm {
+    margin-top: 12px; padding: 10px 14px;
+    background: rgba(251,191,36,0.12); border: 1px solid rgba(251,191,36,0.3);
+    border-radius: 8px; display: flex; align-items: center; gap: 8px;
+    font-size: 11px; color: #fcd34d; font-weight: 500;
+    position: relative; z-index: 1;
+  }
+  .iot-alarm .alarm-icon { font-size: 14px; }
+
+  .iot-features { list-style: none; display: flex; flex-direction: column; gap: 20px; }
+  .iot-feature {
+    display: flex; gap: 16px; align-items: flex-start;
+  }
+  .iot-feature-icon {
+    width: 44px; height: 44px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .iot-feature-icon.g { background: var(--green-50); }
+  .iot-feature-icon.b { background: var(--blue-50); }
+  .iot-feature-icon.t { background: var(--teal-50); }
+  .iot-feature h4 { font-size: 15px; font-weight: 600; color: var(--dark); margin-bottom: 4px; }
+  .iot-feature p { font-size: 13px; color: #5a6a45; line-height: 1.6; }
+
+  /* PYMES */
+  .pymes-section {
+    background: linear-gradient(135deg, #0d1a0a 0%, #0a2040 100%);
+    position: relative; overflow: hidden;
+  }
+  .pymes-section::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image: radial-gradient(circle at 70% 50%, rgba(55,138,221,0.12) 0%, transparent 60%),
+      radial-gradient(circle at 20% 80%, rgba(99,153,34,0.15) 0%, transparent 50%);
+  }
+  .pymes-section .section-title { color: #fff; }
+  .pymes-section .section-sub { color: rgba(255,255,255,0.6); }
+  .pymes-section .section-label { color: var(--green-100); }
+
+  .pymes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px; position: relative; z-index: 1;
+  }
+  .pymes-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: var(--radius);
+    padding: 28px 22px;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .pymes-card:hover {
+    background: rgba(255,255,255,0.11);
+    border-color: rgba(99,153,34,0.4);
+  }
+  .pymes-card-icon { font-size: 32px; margin-bottom: 14px; }
+  .pymes-card h4 { font-size: 15px; font-weight: 600; color: #fff; margin-bottom: 8px; }
+  .pymes-card p { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.6; }
+  .pymes-savings {
+    display: inline-block; margin-top: 12px;
+    background: rgba(99,153,34,0.2); border: 1px solid rgba(99,153,34,0.4);
+    color: var(--green-100); font-size: 12px; font-weight: 700;
+    padding: 3px 10px; border-radius: 16px;
+  }
+
+  /* CALCULADORA */
+  .calc-section { background: var(--gray-50); }
+  .calc-container {
+    max-width: 780px; margin: 0 auto;
+    background: #fff; border-radius: 24px;
+    padding: 48px; box-shadow: var(--shadow-lg);
+    border: 1px solid rgba(99,153,34,0.15);
+  }
+  .calc-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.9rem; color: var(--dark); text-align: center;
+    margin-bottom: 8px;
+  }
+  .calc-sub { text-align: center; color: #5a6a45; font-size: 14px; margin-bottom: 36px; }
+
+  .calc-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 24px; margin-bottom: 32px;
+  }
+  .calc-field label {
+    display: block; font-size: 13px; font-weight: 600;
+    color: #3a4a28; margin-bottom: 8px;
+  }
+  .calc-field .input-wrap {
+    position: relative;
+  }
+  .calc-field .currency {
+    position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+    font-size: 14px; font-weight: 600; color: #9aa880;
+  }
+  .calc-field input {
+    width: 100%; padding: 12px 14px 12px 40px;
+    border: 1.5px solid rgba(99,153,34,0.25);
+    border-radius: 10px; font-family: 'Outfit', sans-serif;
+    font-size: 16px; color: var(--dark);
+    outline: none; transition: border-color 0.2s;
+    background: var(--gray-50);
+  }
+  .calc-field input:focus { border-color: var(--green-400); background: #fff; }
+
+  .calc-btn {
+    width: 100%; padding: 16px;
+    background: linear-gradient(135deg, var(--green-400), var(--blue-600));
+    color: #fff; border: none; border-radius: 12px;
+    font-family: 'Outfit', sans-serif; font-size: 16px; font-weight: 600;
+    cursor: pointer; transition: opacity 0.2s, transform 0.15s;
+    margin-bottom: 28px;
+  }
+  .calc-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+
+  .calc-results {
+    display: none;
+    background: linear-gradient(135deg, #0d1a0a, #0a2040);
+    border-radius: 16px; padding: 32px;
+    color: #fff;
+  }
+  .calc-results.visible { display: block; }
+  .calc-results-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .calc-result-item { text-align: center; }
+  .calc-result-val {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2rem; color: var(--green-100); line-height: 1;
+  }
+  .calc-result-lbl {
+    font-size: 11px; color: rgba(255,255,255,0.5);
+    margin-top: 6px; text-transform: uppercase; letter-spacing: 0.08em;
+  }
+  .calc-disclaimer {
+    margin-top: 16px; font-size: 12px; color: rgba(255,255,255,0.4);
+    text-align: center;
+  }
+
+  /* GRÁFICO COMPARATIVO */
+  .chart-section { background: #fff; }
+  .comparison-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+  .comparison-card {
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1.5px solid;
+  }
+  .comparison-card.bad { border-color: #fca5a5; }
+  .comparison-card.good { border-color: rgba(99,153,34,0.4); }
+  .comp-header {
+    padding: 18px 24px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .comp-header.bad-h { background: #fee2e2; }
+  .comp-header.good-h { background: var(--green-50); }
+  .comp-header h4 { font-size: 15px; font-weight: 700; }
+  .comp-header.bad-h h4 { color: #b91c1c; }
+  .comp-header.good-h h4 { color: var(--green-800); }
+  .comp-header .comp-icon { font-size: 22px; }
+  .comp-body { padding: 24px; }
+  .comp-row {
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 12px;
+  }
+  .comp-row-label { font-size: 13px; color: #5a6a45; width: 130px; flex-shrink: 0; }
+  .comp-bar-wrap { flex: 1; background: #f0f0ec; border-radius: 8px; height: 20px; overflow: hidden; }
+  .comp-bar { height: 100%; border-radius: 8px; display: flex; align-items: center; padding-left: 8px; }
+  .comp-bar span { font-size: 11px; font-weight: 700; color: #fff; }
+  .comp-bar.r1 { width: 85%; background: #ef4444; }
+  .comp-bar.r2 { width: 70%; background: #f97316; }
+  .comp-bar.r3 { width: 90%; background: #ef4444; }
+  .comp-bar.g1 { width: 30%; background: var(--green-400); }
+  .comp-bar.g2 { width: 20%; background: var(--teal-400); }
+  .comp-bar.g3 { width: 25%; background: var(--blue-400); }
+  .comp-total {
+    margin-top: 16px; padding: 12px 16px;
+    border-radius: 10px; display: flex; justify-content: space-between; align-items: center;
+  }
+  .comp-total.bad { background: #fee2e2; }
+  .comp-total.good { background: var(--green-50); }
+  .comp-total .t-label { font-size: 13px; font-weight: 600; }
+  .comp-total.bad .t-label { color: #b91c1c; }
+  .comp-total.good .t-label { color: var(--green-800); }
+  .comp-total .t-val { font-family: 'DM Serif Display', serif; font-size: 1.5rem; }
+  .comp-total.bad .t-val { color: #dc2626; }
+  .comp-total.good .t-val { color: var(--green-600); }
+
+  /* CLIENTES */
+  .clients-section { background: var(--gray-50); }
+  .clients-logos {
+    display: flex; flex-wrap: wrap; gap: 16px;
+    justify-content: center; margin-bottom: 60px;
+  }
+  .client-logo {
+    background: #fff; border: 1px solid rgba(99,153,34,0.15);
+    border-radius: 12px; padding: 16px 28px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 700; color: #3a4a28;
+    min-width: 130px; transition: box-shadow 0.2s, border-color 0.2s;
+    letter-spacing: 0.04em;
+  }
+  .client-logo:hover { box-shadow: var(--shadow); border-color: rgba(99,153,34,0.35); }
+
+  .cases-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+  }
+  .case-card {
+    background: #fff; border-radius: var(--radius);
+    padding: 28px; border: 1px solid rgba(99,153,34,0.12);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .case-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+  .case-tag {
+    display: inline-block;
+    background: var(--green-50); color: var(--green-600);
+    font-size: 11px; font-weight: 700; letter-spacing: 0.08em;
+    text-transform: uppercase; padding: 4px 10px; border-radius: 16px;
+    margin-bottom: 14px;
+  }
+  .case-card h4 { font-size: 16px; font-weight: 700; color: var(--dark); margin-bottom: 8px; }
+  .case-card p { font-size: 13.5px; color: #5a6a45; line-height: 1.6; margin-bottom: 16px; }
+  .case-metric {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.8rem; color: var(--green-400);
+  }
+  .case-metric-label { font-size: 12px; color: #8a9a72; }
+
+  /* CTA FINAL */
+  .cta-section {
+    background: linear-gradient(135deg, var(--green-600), #0a2040);
+    padding: 96px 5vw;
+    text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .cta-section::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.05) 0%, transparent 70%);
+  }
+  .cta-section h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    color: #fff; margin-bottom: 16px;
+    position: relative; z-index: 1;
+  }
+  .cta-section p {
+    color: rgba(255,255,255,0.7); font-size: 1.1rem;
+    max-width: 500px; margin: 0 auto 36px;
+    position: relative; z-index: 1;
+  }
+  .cta-actions {
+    display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;
+    position: relative; z-index: 1;
+  }
+  .btn-white {
+    background: #fff; color: var(--green-800);
+    border: none; padding: 14px 32px; border-radius: 40px;
+    font-family: 'Outfit', sans-serif; font-size: 15px; font-weight: 700;
+    cursor: pointer; transition: all 0.2s; text-decoration: none;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  }
+  .btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,0,0,0.2); }
+
+  /* FOOTER */
+  footer {
+    background: var(--dark);
+    padding: 60px 5vw 32px;
+    color: rgba(255,255,255,0.5);
+  }
+  .footer-grid {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 40px; margin-bottom: 48px;
+  }
+  .footer-brand h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.3rem; color: #fff; margin-bottom: 12px;
+  }
+  .footer-brand p { font-size: 13px; line-height: 1.7; max-width: 260px; }
+  .footer-col h4 { font-size: 13px; font-weight: 700; color: var(--green-100); margin-bottom: 14px; letter-spacing: 0.06em; }
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 8px; }
+  .footer-col ul li a { color: rgba(255,255,255,0.5); text-decoration: none; font-size: 13px; transition: color 0.2s; }
+  .footer-col ul li a:hover { color: var(--green-100); }
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding-top: 24px;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 12px;
+  }
+  .footer-bottom a { color: var(--green-100); text-decoration: none; }
+
+  /* MODAL */
+  .modal-overlay {
+    display: none;
+    position: fixed; inset: 0; z-index: 200;
+    background: rgba(0,0,0,0.65); backdrop-filter: blur(4px);
+    align-items: center; justify-content: center;
+    padding: 20px;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: #fff; border-radius: 24px;
+    padding: 48px; max-width: 520px; width: 100%;
+    position: relative; box-shadow: 0 24px 80px rgba(0,0,0,0.3);
+  }
+  .modal-close {
+    position: absolute; top: 16px; right: 20px;
+    background: none; border: none; font-size: 24px;
+    cursor: pointer; color: #8a9a72; line-height: 1;
+  }
+  .modal-close:hover { color: var(--dark); }
+  .modal h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.8rem; color: var(--dark); margin-bottom: 8px;
+  }
+  .modal p { font-size: 14px; color: #5a6a45; margin-bottom: 24px; }
+  .modal-field { margin-bottom: 16px; }
+  .modal-field label { display: block; font-size: 13px; font-weight: 600; color: #3a4a28; margin-bottom: 6px; }
+  .modal-field input, .modal-field select, .modal-field textarea {
+    width: 100%; padding: 11px 14px;
+    border: 1.5px solid rgba(99,153,34,0.25);
+    border-radius: 10px; font-family: 'Outfit', sans-serif;
+    font-size: 14px; color: var(--dark);
+    outline: none; transition: border-color 0.2s;
+    background: var(--gray-50);
+  }
+  .modal-field input:focus, .modal-field select:focus, .modal-field textarea:focus {
+    border-color: var(--green-400); background: #fff;
+  }
+  .modal-field textarea { resize: vertical; min-height: 80px; }
+  .modal-submit {
+    width: 100%; padding: 14px;
+    background: var(--green-400); color: #fff;
+    border: none; border-radius: 12px;
+    font-family: 'Outfit', sans-serif; font-size: 15px; font-weight: 700;
+    cursor: pointer; transition: background 0.2s;
+    margin-top: 8px;
+  }
+  .modal-submit:hover { background: var(--green-600); }
+  .modal-success { display: none; text-align: center; padding: 20px 0; }
+  .modal-success.visible { display: block; }
+  .modal-success .check { font-size: 48px; margin-bottom: 12px; }
+  .modal-success h4 { font-family: 'DM Serif Display', serif; font-size: 1.5rem; color: var(--dark); margin-bottom: 8px; }
+  .modal-success p { color: #5a6a45; font-size: 14px; }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .hero-stats { display: none; }
+    .ese-grid, .iot-grid, .comparison-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .calc-grid { grid-template-columns: 1fr; }
+    .calc-results-grid { grid-template-columns: 1fr; gap: 12px; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+  }
+
+  @media (max-width: 600px) {
+    section { padding: 64px 5vw; }
+    .footer-grid { grid-template-columns: 1fr; }
+    .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+    .modal { padding: 32px 24px; }
+    .calc-container { padding: 32px 20px; }
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-badge { animation: fadeInUp 0.5s ease both; }
+  .hero h1 { animation: fadeInUp 0.6s 0.1s ease both; }
+  .hero-sub { animation: fadeInUp 0.6s 0.2s ease both; }
+  .hero-actions { animation: fadeInUp 0.6s 0.3s ease both; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-icon">⚡</div>
+    <div class="nav-logo-text">
+      UCB-USFX Gestión Energética
+      <span>Para un Futuro Sostenible</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#iot">Tecnología IoT</a></li>
+    <li><a href="#pymes">Pymes</a></li>
+    <li><a href="#clientes">Clientes</a></li>
+    <li><a href="#calculadora">Calculadora</a></li>
+  </ul>
+  <a href="#" class="nav-cta" onclick="openModal()">Auditoría Gratuita</a>
+  <button class="hamburger" aria-label="Menú" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="hero-bg-grid"></div>
+  <div class="hero-glow hero-glow-1"></div>
+  <div class="hero-glow hero-glow-2"></div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span class="dot"></span>
+      Empresa de Servicios Energéticos — ESE Certificada
+    </div>
+    <h1>Transformamos tu consumo en <em>ahorro real</em></h1>
+    <p class="hero-sub">Gestión inteligente para un futuro sostenible. Nosotros realizamos la inversión, tú pagas solo con los ahorros generados. Cero riesgo financiero para tu empresa.</p>
+    <div class="hero-actions">
+      <a href="#" class="btn-primary" onclick="openModal(); return false;">
+        📋 Solicitar Auditoría Fase 0 Gratuita
+      </a>
+      <a href="#servicios" class="btn-outline">
+        Ver nuestras fases →
+      </a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat-card">
+      <div class="num">30%</div>
+      <div class="label">Ahorro promedio energético</div>
+    </div>
+    <div class="stat-card">
+      <div class="num">0 Bs</div>
+      <div class="label">Inversión inicial del cliente</div>
+    </div>
+    <div class="stat-card">
+      <div class="num">24/7</div>
+      <div class="label">Monitorización remota IoT</div>
+    </div>
+  </div>
+</section>
+
+<!-- MODELO ESE -->
+<section class="ese-section" id="ese">
+  <div class="section-label">Nuestro Modelo</div>
+  <div class="ese-grid">
+    <div>
+      <h2 class="section-title">Somos una ESE: el riesgo es nuestro</h2>
+      <p class="section-sub">Como Empresa de Servicios Energéticos (ESE), asumimos toda la inversión tecnológica. Tu empresa retribuye nuestros servicios únicamente con los ahorros reales que generamos juntos.</p>
+      <div class="ese-flow">
+        <div class="ese-step">
+          <div>
+            <h4>Diagnóstico sin costo</h4>
+            <p>Analizamos tu consumo actual y estimamos el potencial de ahorro sin compromiso y sin costo alguno para ti.</p>
+          </div>
+        </div>
+        <div class="ese-step">
+          <div>
+            <h4>Nosotros invertimos</h4>
+            <p>UCB-USFX financia e instala todas las tecnologías necesarias: equipos, sensores IoT, software de gestión y sistemas de energía renovable.</p>
+          </div>
+        </div>
+        <div class="ese-step">
+          <div>
+            <h4>Tú ahorras, nosotros cobramos</h4>
+            <p>El pago se realiza exclusivamente con una fracción del ahorro generado. Si no hay ahorro, no hay pago. Garantizado contractualmente.</p>
+          </div>
+        </div>
+        <div class="ese-step">
+          <div>
+            <h4>Ahorro neto garantizado</h4>
+            <p>Al finalizar el contrato, toda la tecnología implementada queda en propiedad de tu empresa. Beneficio total, cero deuda.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ese-visual">
+      <div class="ese-highlight">
+        <h3>¿Por qué elegir el modelo ESE?</h3>
+        <p>La eficiencia energética no debería ser un privilegio de las grandes corporaciones. Nuestro modelo democratiza el acceso a tecnologías de vanguardia, desde paneles solares hasta sistemas de monitorización IoT, para cualquier empresa boliviana.</p>
+        <p>Trabajamos bajo los más altos estándares internacionales de auditoría energética, adaptados a la realidad del mercado boliviano.</p>
+        <div>
+          <span class="ese-tag">✅ Sin inversión inicial</span>
+          <span class="ese-tag">✅ Riesgo financiero cero</span>
+          <span class="ese-tag">✅ Ahorro garantizado</span>
+          <span class="ese-tag">✅ Tecnología en propiedad</span>
+          <span class="ese-tag">✅ Estándares ISO 50001</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FASES / SERVICIOS -->
+<section class="fases-section" id="servicios">
+  <div class="section-label">Nuestros Servicios</div>
+  <h2 class="section-title">Cuatro fases hacia la eficiencia total</h2>
+  <p class="section-sub">Un proceso estructurado y progresivo que se adapta a las necesidades reales de cada empresa, sin importar su tamaño.</p>
+  <div class="fases-grid">
+    <div class="fase-card">
+      <div class="fase-num">Fase 0</div>
+      <div class="fase-icon f0">📄</div>
+      <h3>Análisis Básico</h3>
+      <span class="fase-free">✨ Sin Costo</span>
+      <p style="margin-top:12px">Recopilamos tus facturas energéticas de los últimos 12 meses y realizamos un balance estimado de tu consumo para identificar oportunidades de ahorro iniciales.</p>
+      <ul class="fase-bullets">
+        <li>Análisis de facturas eléctricas y gas</li>
+        <li>Balance energético estimado</li>
+        <li>Reporte de oportunidades inicial</li>
+        <li>Entrevista diagnóstica sin compromiso</li>
+      </ul>
+    </div>
+    <div class="fase-card">
+      <div class="fase-num">Fase 1</div>
+      <div class="fase-icon f1">🔍</div>
+      <h3>Diagnóstico Energético</h3>
+      <p>Registramos en detalle los hábitos de consumo de tu empresa, identificamos equipos ineficientes y calculamos el potencial real de ahorro con análisis de datos históricos.</p>
+      <ul class="fase-bullets">
+        <li>Registro de hábitos y patrones de consumo</li>
+        <li>Inventario de equipos e instalaciones</li>
+        <li>Identificación de desperdicios energéticos</li>
+        <li>Cálculo del potencial de ahorro</li>
+      </ul>
+    </div>
+    <div class="fase-card">
+      <div class="fase-num">Fase 2</div>
+      <div class="fase-icon f2">📡</div>
+      <h3>Auditoría Energética</h3>
+      <p>Mediciones técnicas in-situ con equipamiento especializado. Analizamos fugas, temperatura, flujos y calidad de energía para un diagnóstico completo con análisis de retorno de inversión.</p>
+      <ul class="fase-bullets">
+        <li>Termografía infrarroja (puntos calientes)</li>
+        <li>Detección de fugas de aire comprimido</li>
+        <li>Análisis de calidad de energía eléctrica</li>
+        <li>Cálculo de ROI por medida propuesta</li>
+        <li>Informe técnico detallado</li>
+      </ul>
+    </div>
+    <div class="fase-card">
+      <div class="fase-num">Fase 3</div>
+      <div class="fase-icon f3">⚡</div>
+      <h3>Implementación ESE</h3>
+      <p>Implementación completa de medidas con financiamiento propio. Monitorización diaria por software, mantenimiento predictivo y gestión continua de los ahorros garantizados.</p>
+      <ul class="fase-bullets">
+        <li>Instalación de tecnología financiada por UCB-USFX</li>
+        <li>Plataforma IoT de monitorización 24/7</li>
+        <li>Mantenimiento predictivo incluido</li>
+        <li>Informes mensuales de ahorros verificados</li>
+        <li>Garantía contractual de ahorro</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- IOT -->
+<section class="iot-section" id="iot">
+  <div class="section-label">Tecnología IoT</div>
+  <div class="iot-grid">
+    <div>
+      <h2 class="section-title">Monitorización remota en tiempo real</h2>
+      <p class="section-sub">Nuestra plataforma IoT conecta todos los equipos de tu empresa, permitiéndote ver tu consumo energético desde cualquier lugar, en cualquier momento.</p>
+      <ul class="iot-features">
+        <li class="iot-feature">
+          <div class="iot-feature-icon g">📊</div>
+          <div>
+            <h4>Visibilidad total del consumo</h4>
+            <p>Dashboards en tiempo real que muestran el consumo por área, máquina o turno. Detecta picos de demanda antes de que generen sobrecostos en tu factura.</p>
+          </div>
+        </li>
+        <li class="iot-feature">
+          <div class="iot-feature-icon b">🌡️</div>
+          <div>
+            <h4>Detección de "puntos calientes"</h4>
+            <p>Sensores de temperatura identifican automáticamente equipos con sobrecalentamiento, conexiones eléctricas deficientes o fugas de calor antes de que causen fallas costosas.</p>
+          </div>
+        </li>
+        <li class="iot-feature">
+          <div class="iot-feature-icon t">📱</div>
+          <div>
+            <h4>Alarmas directas en tu celular</h4>
+            <p>Recibe notificaciones inmediatas cuando se detecten anomalías de consumo, equipos con consumo fuera de rango o situaciones que puedan generar penalizaciones de la distribuidora.</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div>
+      <div class="iot-dashboard">
+        <div class="iot-top-bar">
+          <span class="iot-logo-text">⚡ UCB-USFX Monitor</span>
+          <div class="iot-live"><div class="dot"></div><span>EN VIVO</span></div>
+        </div>
+        <div class="iot-metrics">
+          <div class="iot-metric">
+            <div class="val good">187<span style="font-size:14px">kW</span></div>
+            <div class="lbl">Potencia actual</div>
+          </div>
+          <div class="iot-metric">
+            <div class="val warn">0.87</div>
+            <div class="lbl">Factor de potencia</div>
+          </div>
+          <div class="iot-metric">
+            <div class="val good">-28%</div>
+            <div class="lbl">vs. mes anterior</div>
+          </div>
+        </div>
+        <div class="iot-chart-area">
+          <div class="iot-chart-label">Consumo horario — hoy (kWh)</div>
+          <div class="iot-bars">
+            <div class="iot-bar" style="height:35%"></div>
+            <div class="iot-bar" style="height:42%"></div>
+            <div class="iot-bar" style="height:38%"></div>
+            <div class="iot-bar" style="height:55%"></div>
+            <div class="iot-bar hot" style="height:78%"></div>
+            <div class="iot-bar hot" style="height:85%"></div>
+            <div class="iot-bar alert" style="height:95%"></div>
+            <div class="iot-bar" style="height:70%"></div>
+            <div class="iot-bar" style="height:60%"></div>
+            <div class="iot-bar" style="height:52%"></div>
+            <div class="iot-bar" style="height:48%"></div>
+            <div class="iot-bar" style="height:44%"></div>
+          </div>
+        </div>
+        <div class="iot-alarm">
+          <span class="alarm-icon">⚠️</span>
+          Pico detectado 08:00–10:00 h — Posible penalización. Revisar compresor #3
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PYMES -->
+<section class="pymes-section" id="pymes">
+  <div style="position:relative;z-index:1">
+    <div class="section-label">Para Pymes</div>
+    <h2 class="section-title">La eficiencia energética no es solo para grandes empresas</h2>
+    <p class="section-sub">Con UCB-USFX, cualquier empresa boliviana puede acceder a soluciones de eficiencia energética. Pequeños cambios generan grandes ahorros desde el primer mes.</p>
+    <div class="pymes-grid">
+      <div class="pymes-card">
+        <div class="pymes-card-icon">💡</div>
+        <h4>Iluminación LED inteligente</h4>
+        <p>Sustituimos luminarias convencionales por sistemas LED de última generación con sensores de presencia y control de luminosidad automático.</p>
+        <span class="pymes-savings">Ahorra hasta 70% en iluminación</span>
+      </div>
+      <div class="pymes-card">
+        <div class="pymes-card-icon">🚶</div>
+        <h4>Sensores de movimiento</h4>
+        <p>Instalamos sensores inteligentes en baños, pasillos, almacenes y oficinas para eliminar el consumo en espacios desocupados.</p>
+        <span class="pymes-savings">Ahorra 40% en áreas comunes</span>
+      </div>
+      <div class="pymes-card">
+        <div class="pymes-card-icon">🌡️</div>
+        <h4>Aislamiento térmico</h4>
+        <p>Mejoramos el aislamiento de paredes, techos y tuberías para reducir drásticamente la carga en sistemas de climatización y refrigeración.</p>
+        <span class="pymes-savings">Ahorra 35% en climatización</span>
+      </div>
+      <div class="pymes-card">
+        <div class="pymes-card-icon">☀️</div>
+        <h4>Energía solar fotovoltaica</h4>
+        <p>Instalamos paneles solares dimensionados para tu consumo real. Sin inversión inicial. El ahorro en factura cubre nuestro servicio.</p>
+        <span class="pymes-savings">Hasta 90% menos en factura solar</span>
+      </div>
+      <div class="pymes-card">
+        <div class="pymes-card-icon">🔧</div>
+        <h4>Optimización de motores</h4>
+        <p>Análisis y optimización de motores eléctricos con variadores de frecuencia que reducen el consumo adaptando la potencia a la demanda real.</p>
+        <span class="pymes-savings">Ahorra 30% en motores</span>
+      </div>
+      <div class="pymes-card">
+        <div class="pymes-card-icon">📊</div>
+        <h4>Medición y verificación</h4>
+        <p>Instalamos medidores inteligentes por circuito para que conozcas exactamente dónde se va cada boliviano de tu factura eléctrica.</p>
+        <span class="pymes-savings">Control total del gasto</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CALCULADORA -->
+<section class="calc-section" id="calculadora">
+  <div class="section-label">Calculadora de Ahorro</div>
+  <h2 class="section-title" style="text-align:center">¿Cuánto podrías ahorrar?</h2>
+  <p class="section-sub" style="text-align:center;margin:0 auto 48px">Ingresa tus gastos mensuales actuales y estima tu ahorro potencial con UCB-USFX Gestión Energética.</p>
+  <div class="calc-container">
+    <div class="calc-grid">
+      <div class="calc-field">
+        <label>Gasto mensual en electricidad (Bs)</label>
+        <div class="input-wrap">
+          <span class="currency">Bs</span>
+          <input type="number" id="elec-input" placeholder="Ej: 8.500" min="0">
+        </div>
+      </div>
+      <div class="calc-field">
+        <label>Gasto mensual en gas (Bs)</label>
+        <div class="input-wrap">
+          <span class="currency">Bs</span>
+          <input type="number" id="gas-input" placeholder="Ej: 3.200" min="0">
+        </div>
+      </div>
+      <div class="calc-field">
+        <label>Gasto en combustibles (Bs/mes)</label>
+        <div class="input-wrap">
+          <span class="currency">Bs</span>
+          <input type="number" id="comb-input" placeholder="Ej: 2.000" min="0">
+        </div>
+      </div>
+      <div class="calc-field">
+        <label>Tipo de empresa</label>
+        <div class="input-wrap">
+          <select id="tipo-input" style="width:100%;padding:12px 14px;border:1.5px solid rgba(99,153,34,0.25);border-radius:10px;font-family:'Outfit',sans-serif;font-size:14px;color:#1a2e10;outline:none;background:#f4f6f0;appearance:none;">
+            <option value="0.28">Industria manufacturera</option>
+            <option value="0.30">Pyme comercial</option>
+            <option value="0.32">Oficinas y servicios</option>
+            <option value="0.25">Agroindustria</option>
+            <option value="0.35">Hotelería y turismo</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <button class="calc-btn" onclick="calcularAhorro()">⚡ Calcular mi ahorro potencial</button>
+    <div class="calc-results" id="calc-results">
+      <div class="calc-results-grid">
+        <div class="calc-result-item">
+          <div class="calc-result-val" id="res-mensual">—</div>
+          <div class="calc-result-lbl">Ahorro mensual estimado (Bs)</div>
+        </div>
+        <div class="calc-result-item">
+          <div class="calc-result-val" id="res-anual">—</div>
+          <div class="calc-result-lbl">Ahorro anual proyectado (Bs)</div>
+        </div>
+        <div class="calc-result-item">
+          <div class="calc-result-val" id="res-co2">—</div>
+          <div class="calc-result-lbl">CO₂ evitado/año (ton)</div>
+        </div>
+      </div>
+      <p class="calc-disclaimer">* Estimación orientativa basada en proyectos similares. El ahorro real se determina en la Auditoría Energética (Fase 2). Solicita tu Fase 0 gratuita para un análisis personalizado.</p>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARATIVO -->
+<section class="chart-section" id="comparativo">
+  <div class="section-label">Impacto Visual</div>
+  <h2 class="section-title">Antes y después de la optimización</h2>
+  <p class="section-sub">Así se ve el consumo energético de una empresa típica antes y después de implementar nuestras soluciones.</p>
+  <div class="comparison-grid">
+    <div class="comparison-card bad">
+      <div class="comp-header bad-h">
+        <span class="comp-icon">⚠️</span>
+        <h4>Sistema con desperdicios energéticos</h4>
+      </div>
+      <div class="comp-body">
+        <div class="comp-row">
+          <span class="comp-row-label">Fugas aire comprimido</span>
+          <div class="comp-bar-wrap"><div class="comp-bar r1"><span>85%</span></div></div>
+        </div>
+        <div class="comp-row">
+          <span class="comp-row-label">Mala gestión térmica</span>
+          <div class="comp-bar-wrap"><div class="comp-bar r2"><span>70%</span></div></div>
+        </div>
+        <div class="comp-row">
+          <span class="comp-row-label">Iluminación ineficiente</span>
+          <div class="comp-bar-wrap"><div class="comp-bar r3"><span>90%</span></div></div>
+        </div>
+        <div class="comp-total bad">
+          <span class="t-label">Costo energético mensual</span>
+          <span class="t-val">Bs 15.000</span>
+        </div>
+      </div>
+    </div>
+    <div class="comparison-card good">
+      <div class="comp-header good-h">
+        <span class="comp-icon">✅</span>
+        <h4>Sistema optimizado con UCB-USFX</h4>
+      </div>
+      <div class="comp-body">
+        <div class="comp-row">
+          <span class="comp-row-label">Control aire comprimido</span>
+          <div class="comp-bar-wrap"><div class="comp-bar g1"><span>30%</span></div></div>
+        </div>
+        <div class="comp-row">
+          <span class="comp-row-label">Gestión térmica inteligente</span>
+          <div class="comp-bar-wrap"><div class="comp-bar g2"><span>20%</span></div></div>
+        </div>
+        <div class="comp-row">
+          <span class="comp-row-label">Iluminación LED + sensores</span>
+          <div class="comp-bar-wrap"><div class="comp-bar g3"><span>25%</span></div></div>
+        </div>
+        <div class="comp-total good">
+          <span class="t-label">Costo energético mensual</span>
+          <span class="t-val">Bs 10.200</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLIENTES -->
+<section class="clients-section" id="clientes">
+  <div class="section-label">Nuestros Clientes</div>
+  <h2 class="section-title">Empresas que confían en nosotros</h2>
+  <p class="section-sub">Trabajamos con líderes de la industria boliviana, acompañándolos en su transición hacia operaciones más eficientes y sostenibles.</p>
+  <div class="clients-logos">
+    <div class="client-logo">SOBOCE</div>
+    <div class="client-logo">CBN</div>
+    <div class="client-logo">Banco BISA</div>
+    <div class="client-logo">EMBOL S.A.</div>
+    <div class="client-logo">YPFB</div>
+    <div class="client-logo">COBIJA</div>
+    <div class="client-logo">ELFEC</div>
+    <div class="client-logo">FANCESA</div>
+  </div>
+
+  <div class="section-label" style="margin-top:0">Casos de Éxito</div>
+  <h3 style="font-family:'DM Serif Display',serif;font-size:1.6rem;color:var(--dark);margin-bottom:36px">Resultados verificados en Bolivia</h3>
+  <div class="cases-grid">
+    <div class="case-card">
+      <span class="case-tag">☀️ Energía Solar</span>
+      <h4>Planta industrial — Santa Cruz</h4>
+      <p>Instalación de sistema fotovoltaico de 450 kWp en techo de planta cementera. Monitorización IoT en tiempo real. Sin inversión inicial del cliente bajo modelo ESE.</p>
+      <div class="case-metric">68%</div>
+      <div class="case-metric-label">de reducción en factura eléctrica — ROI: 4.2 años</div>
+    </div>
+    <div class="case-card">
+      <span class="case-tag">🚗 Movilidad Eléctrica</span>
+      <h4>Flota corporativa — La Paz</h4>
+      <p>Conversión de 15 vehículos corporativos a eléctricos con instalación de cargadores inteligentes de gestión dinámica de carga para optimizar la demanda eléctrica.</p>
+      <div class="case-metric">Bs 8.400</div>
+      <div class="case-metric-label">de ahorro mensual en combustible — por vehículo</div>
+    </div>
+    <div class="case-card">
+      <span class="case-tag">❄️ Gestión Térmica</span>
+      <h4>Planta de alimentos — Cochabamba</h4>
+      <p>Auditoría térmica completa con termografía infrarroja. Mejora del aislamiento de cámaras frigoríficas y optimización del ciclo de compresores de refrigeración.</p>
+      <div class="case-metric">34%</div>
+      <div class="case-metric-label">menos consumo en refrigeración — 280 ton CO₂/año evitadas</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-section">
+  <h2>¿Listo para transformar tu consumo en rentabilidad?</h2>
+  <p>Solicita tu Auditoría Fase 0 gratuita hoy. En 48 horas te contactamos con una estimación inicial de ahorro, sin compromiso.</p>
+  <div class="cta-actions">
+    <a href="#" class="btn-white" onclick="openModal(); return false;">📋 Solicitar Auditoría Gratuita</a>
+    <a href="#calculadora" class="btn-outline" style="border-color:rgba(255,255,255,0.3);color:#fff">Calcular mi ahorro →</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <h3>UCB-USFX Gestión Energética</h3>
+      <p>Empresa de Servicios Energéticos comprometida con la eficiencia y la sostenibilidad de Bolivia. Transformamos el consumo energético en ventaja competitiva.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Servicios</h4>
+      <ul>
+        <li><a href="#">Fase 0 — Análisis Gratuito</a></li>
+        <li><a href="#">Fase 1 — Diagnóstico</a></li>
+        <li><a href="#">Fase 2 — Auditoría</a></li>
+        <li><a href="#">Fase 3 — Implementación ESE</a></li>
+        <li><a href="#">Monitorización IoT</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Empresa</h4>
+      <ul>
+        <li><a href="#">Quiénes somos</a></li>
+        <li><a href="#">Modelo ESE</a></li>
+        <li><a href="#">Casos de Éxito</a></li>
+        <li><a href="#">Certificaciones</a></li>
+        <li><a href="#">Trabaja con nosotros</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contacto</h4>
+      <ul>
+        <li><a href="#">📍 La Paz, Bolivia</a></li>
+        <li><a href="#">📞 +591 2 XXXXXXX</a></li>
+        <li><a href="#">✉️ info@ucbusfx-energia.bo</a></li>
+        <li><a href="#">🌐 ucbusfx-energia.bo</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 UCB-USFX Gestión Energética. Todos los derechos reservados.</span>
+    <span>Desarrollado con ♻️ compromiso sostenible · <a href="#">Política de Privacidad</a></span>
+  </div>
+</footer>
+
+<!-- MODAL AUDITORÍA -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModalOnOverlay(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()" aria-label="Cerrar">×</button>
+    <div id="modal-form-content">
+      <h3>Solicitar Auditoría Fase 0</h3>
+      <p>Completa el formulario y nos contactamos en menos de 48 horas con una estimación gratuita de ahorro para tu empresa. Sin compromiso.</p>
+      <div class="modal-field">
+        <label>Nombre completo *</label>
+        <input type="text" id="m-nombre" placeholder="Juan García">
+      </div>
+      <div class="modal-field">
+        <label>Empresa *</label>
+        <input type="text" id="m-empresa" placeholder="Mi Empresa S.R.L.">
+      </div>
+      <div class="modal-field">
+        <label>Ciudad</label>
+        <select id="m-ciudad">
+          <option>La Paz</option><option>Santa Cruz</option><option>Cochabamba</option>
+          <option>Oruro</option><option>Potosí</option><option>Tarija</option>
+          <option>Beni</option><option>Pando</option>
+        </select>
+      </div>
+      <div class="modal-field">
+        <label>Teléfono / WhatsApp *</label>
+        <input type="tel" id="m-tel" placeholder="+591 7XXXXXXX">
+      </div>
+      <div class="modal-field">
+        <label>Gasto mensual estimado en energía (Bs)</label>
+        <input type="number" id="m-gasto" placeholder="Ej: 12.000">
+      </div>
+      <div class="modal-field">
+        <label>¿Algún detalle adicional?</label>
+        <textarea id="m-mensaje" placeholder="Cuéntanos brevemente sobre tu empresa y necesidades energéticas..."></textarea>
+      </div>
+      <button class="modal-submit" onclick="submitForm()">✅ Solicitar auditoría gratuita</button>
+    </div>
+    <div class="modal-success" id="modal-success">
+      <div class="check">✅</div>
+      <h4>¡Solicitud recibida!</h4>
+      <p>Gracias por contactarnos. Nuestro equipo de expertos energéticos se pondrá en contacto contigo en menos de 48 horas hábiles con tu estimación de ahorro personalizada.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+function openModal() {
+  document.getElementById('modal-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+  document.getElementById('modal-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function closeModalOnOverlay(e) {
+  if (e.target === document.getElementById('modal-overlay')) closeModal();
+}
+function submitForm() {
+  var nombre = document.getElementById('m-nombre').value.trim();
+  var empresa = document.getElementById('m-empresa').value.trim();
+  var tel = document.getElementById('m-tel').value.trim();
+  if (!nombre || !empresa || !tel) {
+    alert('Por favor completa los campos obligatorios (*)');
+    return;
+  }
+  document.getElementById('modal-form-content').style.display = 'none';
+  document.getElementById('modal-success').classList.add('visible');
+  setTimeout(closeModal, 3500);
+}
+
+function calcularAhorro() {
+  var elec = parseFloat(document.getElementById('elec-input').value) || 0;
+  var gas = parseFloat(document.getElementById('gas-input').value) || 0;
+  var comb = parseFloat(document.getElementById('comb-input').value) || 0;
+  var factor = parseFloat(document.getElementById('tipo-input').value);
+
+  if (elec + gas + comb === 0) {
+    alert('Ingresa al menos un valor de gasto mensual para calcular el ahorro.');
+    return;
+  }
+
+  var total = elec + gas + comb;
+  var mensual = Math.round(total * factor);
+  var anual = mensual * 12;
+  var co2 = Math.round((elec * factor * 12) * 0.000432);
+
+  function fmt(n) { return n.toLocaleString('es-BO'); }
+
+  document.getElementById('res-mensual').textContent = 'Bs ' + fmt(mensual);
+  document.getElementById('res-anual').textContent = 'Bs ' + fmt(anual);
+  document.getElementById('res-co2').textContent = co2 + ' t';
+
+  var r = document.getElementById('calc-results');
+  r.classList.add('visible');
+  r.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function toggleMenu() {
+  var links = document.querySelector('.nav-links');
+  if (links.style.display === 'flex') {
+    links.style.display = '';
+  } else {
+    links.style.cssText = 'display:flex;flex-direction:column;position:absolute;top:68px;left:0;right:0;background:rgba(13,26,10,0.98);padding:16px 5vw 24px;gap:16px;border-bottom:1px solid rgba(99,153,34,0.2);';
+  }
+}
+</script>
+</body>
+</html>
